@@ -1,16 +1,28 @@
 # action.yml
-name: 'Hello World'
-description: 'Greet someone and record the time'
+name: 'Visualize References'
+description: 'Visualize references'
 inputs:
-  who-to-greet:  # id of input
-    description: 'Who to greet'
+  bib-path:
+    description: 'Path to bib file'
     required: true
-    default: 'World'
-outputs:
-  time: # id of output
-    description: 'The time we greeted you'
+    default: 'references.bib'
+  metadata-path:
+    description: 'folder that contains the metadata of the papers'
+    required: false
+    default: 'data/metadata/'
+  connections-path:
+    description: 'folder that contains the connections of the papers'
+    required: false
+    default: 'data/connections/'
+  map-path:
+    description: 'folder that contains the visualizations of the papers'
+    required: false
+    default: 'data/visualizations'
 runs:
   using: 'docker'
   image: 'Dockerfile'
   args:
-    - ${{ inputs.who-to-greet }}
+    - ${{ inputs.bib-path }}
+    - ${{ inputs.metadata-path }}
+    - ${{ inputs.connections-path }}
+    - ${{ inputs.map-path }}
